@@ -141,3 +141,19 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Data files (keep folder structure)
+data/*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temp/Debug
+.tmp
+npm-debug.log
+*.log
+
+# IDE
+.vscode/
+.idea/
