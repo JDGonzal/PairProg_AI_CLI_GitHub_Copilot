@@ -22,13 +22,45 @@ function getCommits(repoPath, since, until) {
   try {
     const output = execFileSync(
       'git',
-      ['-C', repoPath, 'log', `--since=${since} 00:00:00`, `--until=${until} 23:59:59`, '--pretty=format:%s\t%an'],
+      ['-C', repoPath, 'log', `--since=${since} 00:00:00`, `--until=${until} 23:59:59`, '--pretty=format:%H\t%s\t%an'],
       { encoding: 'utf-8', timeout: 10000 }
     );
     if (!output.trim()) return [];
     return output.trim().split('\n').map(line => {
-      const [message, author] = line.split('\t');
-      return { message, author };
+      const [hash, message, author] = line.split('\t');
+      let filesChanged = 0;
+      let linesAdded = 0;
+      let linesDeleted = 0;
+
+      try {
+        const diffOutput = execFileSync(
+          'git',
+          ['-C', repoPath, 'diff-tree', '--numstat', hash],
+          { encoding: 'utf-8', timeout: 5000 }
+        );
+        const lines = diffOutput.trim().split('\n').filter(l => l.trim());
+        filesChanged = lines.length;
+        lines.forEach(line => {
+          const parts = line.split('\t');
+          if (parts.length >= 3) {
+            const added = parseInt(parts[0], 10) || 0;
+            const deleted = parseInt(parts[1], 10) || 0;
+            linesAdded += added;
+            linesDeleted += deleted;
+          }
+        });
+      } catch (diffError) {
+        console.warn(`Could not fetch diff stats for ${hash}:`, diffError.message);
+      }
+
+      return {
+        hash: hash.substring(0, 7),
+        message,
+        author,
+        filesChanged,
+        linesAdded,
+        linesDeleted
+      };
     });
   } catch (error) {
     console.error('Error fetching commits:', error.message);

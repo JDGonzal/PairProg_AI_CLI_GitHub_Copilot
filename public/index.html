@@ -117,9 +117,48 @@
         list.innerHTML = '<li class="empty">No commits</li>';
         return;
       }
-      commits.forEach(c => {
+      commits.forEach((c, idx) => {
         const li = document.createElement('li');
-        li.textContent = `${c.message} — ${c.author}`;
+        li.className = 'commit-item';
+        
+        const header = document.createElement('div');
+        header.className = 'commit-header';
+        
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'commit-toggle';
+        toggle.textContent = '▶';
+        toggle.setAttribute('aria-label', 'Toggle commit details');
+        
+        const summary = document.createElement('div');
+        summary.className = 'commit-summary';
+        summary.innerHTML = `<span class="commit-hash">${c.hash}</span> <span class="commit-message">${c.message}</span> — <span class="commit-author">${c.author}</span>`;
+        
+        header.appendChild(toggle);
+        header.appendChild(summary);
+        li.appendChild(header);
+        
+        const details = document.createElement('div');
+        details.className = 'commit-details hidden';
+        details.innerHTML = `
+          <div class="diff-stat">
+            <span class="stat-label">Files changed:</span> <span class="stat-value">${c.filesChanged}</span>
+          </div>
+          <div class="diff-stat">
+            <span class="stat-label">Lines added:</span> <span class="stat-value additions">+${c.linesAdded}</span>
+          </div>
+          <div class="diff-stat">
+            <span class="stat-label">Lines deleted:</span> <span class="stat-value deletions">−${c.linesDeleted}</span>
+          </div>
+        `;
+        li.appendChild(details);
+        
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          details.classList.toggle('hidden');
+          toggle.textContent = details.classList.contains('hidden') ? '▶' : '▼';
+        });
+        
         list.appendChild(li);
       });
     }
