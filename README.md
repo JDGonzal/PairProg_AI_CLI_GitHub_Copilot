@@ -317,4 +317,81 @@ Output a concrete plan, including what files you'll create/modify
 ```
 18. I restarted the PC to use in the `TERMINAL` of `VisualStudio` the command: </br> `pnpm start`
 
+---
+
+### 2.3. Reviewing code
+
+1. After activate `copilot` in a `TERMINAL`, just write the command: </br> `/review` </br> Without additional instructions or prompt.
+2. It shows at end the complete info: </br> ![Code Review Complete](images/2026-06-25_154919.png "Code Review Complete")
+
+
+
+
+
+
+
+
+3. The main info was: </br> <span style="color:gold;background:black">**Recommended next steps:** Fix the path traversal vulnerability first (critical security issue), then add error handling to the POST handler.</span>
+4. I will request using `/plan fix the Critical issue`
+5. At the first question I'll select number 1: </br> ![Whitelist via environment variable](images/2026-06-25_160616.png "Whitelist via environment variable")
+
+
+
+
+
+
+
+6. I select the option number 1: </br> ![.](images/2026-06-25_160935.png "Accept plan and build on autopilot (recommended)")
+
+
+
+
+
+
+
+7. Enabled all permissions.
+8. Fixed an this this the : </br> ![Fixed the critical path in server.js](images/2026-06-25_161400.png "Fixed the critical path in server.js")
+
+
+
+
+
+
+
+
+
+9. I request this command: </br> `create an .env file with the variable ALLOWED_REPO_PATHS, equal to those paths:                  /Users/juangon.zalezp/Development/tutorials/ai/PairProg_AI_CLI_GitHub_Copilot,                   /Users/juangon.zalezp/Development/tutorials/nodejs/Playwright-1.55-Docker-Cucumber-Jenkins-SEP25/` </br> ![.](images/2026-06-25_163050.png "")
+
+
+
+
+
+
+
+
+
+
+10. I test but get incomplete information form this environment variable, then put this command: </br> `fix the ALLOWED_REPO_PATHS, when read, because only read the first value of .env file, it must read both, to put in the array, correction or server.js or in .env file`
+11. It was the process: </br> ![.](images/2026-06-25_164109.png "")
+
+
+
+
+
+
+
+
+
+
+12. Stop the `pnpm start`.
+13. Run the command `pnpm i`.
+14. And run again the `pnpm start`, and it reads all the directories in the list. ✅
+15. I write the command: `quit` and it gives me the loken used:
+```bash
+  ╭─╮╭─╮   Changes    +96 -2
+  ╰─╯╰─╯   AI Credits 47.7 (2h 32m 7s)
+  █ ▘▝ █   Tokens     ↑ 1.6m (1.4m cached, 208.2k written) • ↓ 14.6k (5.4k reasoning)
+   ▔▔▔▔    Resume     copilot --resume=6dfb0283-7ff0-4937-8225-db8e9da28c2f
+```
+
 

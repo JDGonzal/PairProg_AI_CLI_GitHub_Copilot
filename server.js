@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -6,8 +7,28 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Parse ALLOWED_REPO_PATHS from environment (colon-separated or comma-separated)
+const ALLOWED_REPO_PATHS = process.env.ALLOWED_REPO_PATHS
+  ? process.env.ALLOWED_REPO_PATHS.split(/[,:;]/).filter(p => p.trim())
+  : [process.cwd()];
+
+console.log('Allowed repository paths:', ALLOWED_REPO_PATHS); 
+
 app.use(express.json());
 app.use(express.static('public'));
+
+function isPathAllowed(resolvedPath, allowedPaths) {
+  // Check if resolvedPath is within any of the allowed base directories
+  for (const allowedPath of allowedPaths) {
+    const realAllowedPath = fs.realpathSync(allowedPath);
+    const relativePath = path.relative(realAllowedPath, resolvedPath);
+    // If relative path doesn't start with .., it's within the allowed directory
+    if (!relativePath.startsWith('..') && relativePath !== '.') {
+      return true;
+    }
+  }
+  return false;
+}
 
 function getDateString(daysAgo) {
   const date = new Date();
@@ -76,13 +97,16 @@ app.post('/api/standup', (req, res) => {
   }
 
   // Resolve symlinks to get the real path
-  // Note: In production, consider validating that resolvedPath is within
-  // an allowed directory to prevent access to arbitrary filesystem locations
   let resolvedPath;
   try {
     resolvedPath = fs.realpathSync(repoPath);
   } catch (error) {
     return res.status(400).json({ error: 'Path does not exist or cannot be accessed' });
+  }
+
+  // Security check: Validate that resolvedPath is within an allowed directory
+  if (!isPathAllowed(resolvedPath, ALLOWED_REPO_PATHS)) {
+    return res.status(403).json({ error: 'Access to this repository path is not allowed' });
   }
 
   // Check if it's a git repository
