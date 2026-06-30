@@ -36,10 +36,10 @@ To resolve this issue:
 	- [GitHub Copilot CLI](https://github.com/features/copilot/cli/)
 2. Clone this repository into your local machine.
 3. Install dependencies and start the server:
-```bash
-   npm install
-   npm start
-```
+
+        npm install
+        npm start
+
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Instructor
@@ -128,25 +128,25 @@ Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learn
 
 1. I keep into the `copilot` environment.
 2. Now I write the command first:
-```command
-/plan
-```
+
+        /plan
+
 3. Then add the Promt as a copy-paste
-```txt
-Plan adding git parsing + UI to this app.
+        ```txt
+          Plan adding git parsing + UI to this app.
 
-We want:
-Local-only git parsing from a user-provider repo path using git log (no GitHub APIs).
-Simple UI: repo path input + Generate button + show Yesterday/Today/Blockers.
-Constrains:
+        We want:
+        Local-only git parsing from a user-provider repo path using git log (no GitHub APIs).
+        Simple UI: repo path input + Generate button + show Yesterday/Today/Blockers.
+        Constrains:
 
-Express + vanilla JS only (no frameworks)
-Single user
-Local repos only
-Keep it minimal: 1 API endpoint
-Basic error handling
-Output a concrete plan, including what files you'll create/modify
-```
+        Express + vanilla JS only (no frameworks)
+        Single user
+        Local repos only
+        Keep it minimal: 1 API endpoint
+        Basic error handling
+        Output a concrete plan, including what files you'll create/modify
+        ```
 
 4. For the instructor, make a questions regarding how to proceed, as additional details.
 5. To the first I select number 1: </br> ![Add more git metadata](images/2026-06-24_164702.png "Add more git metadata")
@@ -186,29 +186,29 @@ Output a concrete plan, including what files you'll create/modify
 
 
 10. That was the plan for </br> `~/.copilot/session-state/dfb5455f-f852-40b0-bd57-3cb1db73d1b4/plan.md`:
-```plan
-● Perfect! I've created a comprehensive plan for enhancing your standup generator with git metadata. Here's the summary:
+        ```plan
+        ● Perfect! I've created a comprehensive plan for enhancing your standup generator with git metadata. Here's the summary:
 
-  Plan Summary
+          Plan Summary
 
-  Objective: Add enhanced git metadata (commit hashes, file changes, diff stats) with collapsible UI sections
+          Objective: Add enhanced git metadata (commit hashes, file changes, diff stats) with collapsible UI sections
 
-  Key Changes:
+          Key Changes:
 
-   - Backend: Extend getCommits() to extract commit hashes and diff statistics using git diff-tree --numstat
-   - Frontend: Convert commits to collapsible items showing hash + message inline, with expandable details for files/line counts
-   - Architecture: Keep 1 API endpoint, no frameworks, vanilla JS only
+          - Backend: Extend getCommits() to extract commit hashes and diff statistics using git diff-tree --numstat
+          - Frontend: Convert commits to collapsible items showing hash + message inline, with expandable details for files/line counts
+          - Architecture: Keep 1 API endpoint, no frameworks, vanilla JS only
 
-  Files to Modify:
+          Files to Modify:
 
-   - server.js – Extract enhanced commit metadata
-   - public/index.html – Add collapsible sections + expand/collapse logic
-   - public/styles.css – Style toggle indicators and diff stats (green for additions, red for deletions)
+          - server.js – Extract enhanced commit metadata
+          - public/index.html – Add collapsible sections + expand/collapse logic
+          - public/styles.css – Style toggle indicators and diff stats (green for additions, red for deletions)
 
-  Tracked as 4 todos: backend parsing, error handling, frontend collapsibles, and styling
+          Tracked as 4 todos: backend parsing, error handling, frontend collapsibles, and styling
 
-  Would you like me to proceed with implementation, or would you like to adjust the plan first?
-```
+          Would you like me to proceed with implementation, or would you like to adjust the plan first?
+        ```
 - ![Plan Summary](images/2026-06-24_171108.png "Plan Summary")
 
 
@@ -227,42 +227,42 @@ Output a concrete plan, including what files you'll create/modify
 
 
 12. This the message with the all was correct:
-```plan
-● Perfect! ✅ Implementation complete! Here's what was delivered:
+        ```plan
+        ● Perfect! ✅ Implementation complete! Here's what was delivered:
 
-  Summary of Changes
+          Summary of Changes
 
-  1. Backend Enhancement (server.js)
+          1. Backend Enhancement (server.js)
 
-   - Modified getCommits() to extract full commit hashes and diff statistics
-   - Added git diff-tree --numstat calls per commit to gather: - Files changed
-   - Lines added
-   - Lines deleted
-   - Returns enhanced objects: { hash, message, author, filesChanged, linesAdded, linesDeleted }
+          - Modified getCommits() to extract full commit hashes and diff statistics
+          - Added git diff-tree --numstat calls per commit to gather: - Files changed
+          - Lines added
+          - Lines deleted
+          - Returns enhanced objects: { hash, message, author, filesChanged, linesAdded, linesDeleted }
 
-  2. Frontend Interactivity (public/index.html)
+          2. Frontend Interactivity (public/index.html)
 
-   - Updated renderCommits() to create collapsible commit items
-   - Each commit shows: toggle chevron + short hash + message — author
-   - Click toggle to expand/collapse diff stats details
-   - Details display: files changed count, lines added (+green), lines deleted (−red)
+          - Updated renderCommits() to create collapsible commit items
+          - Each commit shows: toggle chevron + short hash + message — author
+          - Click toggle to expand/collapse diff stats details
+          - Details display: files changed count, lines added (+green), lines deleted (−red)
 
-  3. Styling (public/styles.css)
+          3. Styling (public/styles.css)
 
-   - Added .commit-item and .commit-header for layout
-   - Toggle chevron button with animation states (▶ / ▼)
-   - Collapsible .commit-details section with blue left border
-   - Color-coded stats: green for additions, red for deletions
-   - Monospace font for commit hashes
+          - Added .commit-item and .commit-header for layout
+          - Toggle chevron button with animation states (▶ / ▼)
+          - Collapsible .commit-details section with blue left border
+          - Color-coded stats: green for additions, red for deletions
+          - Monospace font for commit hashes
 
-  Testing
+          Testing
 
-  ✅ API verified returning enhanced metadata
-  ✅ Diff stats correctly extracted via git diff-tree
-  ✅ Error handling in place for edge cases (merge commits, malformed output)
+          ✅ API verified returning enhanced metadata
+          ✅ Diff stats correctly extracted via git diff-tree
+          ✅ Error handling in place for edge cases (merge commits, malformed output)
 
-  All 4 todos marked done. The app maintains the minimal 1-endpoint architecture while providing rich git insights via local parsing.
-```
+          All 4 todos marked done. The app maintains the minimal 1-endpoint architecture while providing rich git insights via local parsing.
+        ```
 - ![Summary of Changes](images/2026-06-24_171421.png "Summary of Changes")
 
 
@@ -307,14 +307,12 @@ Output a concrete plan, including what files you'll create/modify
 
 
 17. Close the `TERMINAL` session  to `Copilot` with the `quit`command, and it shows me the summary of token used:
-```bash
   
-  ╭─╮╭─╮   Changes    +240 -5
-  ╰─╯╰─╯   AI Credits 33.6 (55m 39s)
-  █ ▘▝ █   Tokens     ↑ 1.5m (1.3m cached, 111.9k written) • ↓ 12.1k (2.7k reasoning)
-   ▔▔▔▔    Resume     copilot --resume=dfb5455f-f852-40b0-bd57-3cb1db73d1b4
+          ╭─╮╭─╮   Changes    +240 -5
+          ╰─╯╰─╯   AI Credits 33.6 (55m 39s)
+          █ ▘▝ █   Tokens     ↑ 1.5m (1.3m cached, 111.9k written) • ↓ 12.1k (2.7k reasoning)
+          ▔▔▔▔    Resume     copilot --resume=dfb5455f-f852-40b0-bd57-3cb1db73d1b4
 
-```
 18. I restarted the PC to use in the `TERMINAL` of `VisualStudio` the command: </br> `pnpm start`
 
 ---
@@ -386,12 +384,181 @@ Output a concrete plan, including what files you'll create/modify
 12. Stop the `pnpm start`.
 13. Run the command `pnpm i`.
 14. And run again the `pnpm start`, and it reads all the directories in the list. ✅
-15. I write the command: `quit` and it gives me the loken used:
-```bash
-  ╭─╮╭─╮   Changes    +96 -2
-  ╰─╯╰─╯   AI Credits 47.7 (2h 32m 7s)
-  █ ▘▝ █   Tokens     ↑ 1.6m (1.4m cached, 208.2k written) • ↓ 14.6k (5.4k reasoning)
-   ▔▔▔▔    Resume     copilot --resume=6dfb0283-7ff0-4937-8225-db8e9da28c2f
-```
+15. I write the command: `quit` and it gives me the token used:
+
+        ╭─╮╭─╮   Changes    +96 -2
+        ╰─╯╰─╯   AI Credits 47.7 (2h 32m 7s)
+        █ ▘▝ █   Tokens     ↑ 1.6m (1.4m cached, 208.2k written) • ↓ 14.6k (5.4k reasoning)
+         ▔▔▔▔    Resume     copilot --resume=6dfb0283-7ff0-4937-8225-db8e9da28c2f
+
+### 2.4. Delegating to the cloud
+
+1. Let's go to do ne necessary for the copilot do the changes for us. </br> Using the command </br> `/delegate please address the issues from this code review in the smallest possible way`
+2. But this answer me:
+
+<span style="color:orange;background:black">  Copilot CLI lets you delegate tasks to GitHub and keep coding locally.
+    Upgrade your plan to enable this feature. </br>
+    └ https://github.com/settings/copilot </span>
+
+---
+
+## 3. Extending Copilot CLI with Skills and MCP Servers
+
+### 3.1. Using the built-in GitHub MCP Server
+
+1. Just write the command: </br> `/mcp add`
+2. This is the options is is showing: </br> ![STUDIO and Auto](images/2026-06-30_171037.png "STUDIO and Auto")
 
 
+
+
+
+
+
+
+
+
+
+
+3. I just press `[Esc]` twice to exit.
+4. Another command: </br> `/mcp show` </br> It shows: </br> ![.](images/2026-06-30_171941.png "MCP Servers")
+
+
+
+
+
+
+
+
+
+5. I pressed `[Enter]` and get this new information: </br> ![MCP server github-mcp-server](images/2026-06-30_173610.png "MCP server github-mcp-server") </br> Then press `[Esc]` twice.
+
+
+
+
+
+
+
+
+
+
+
+
+
+6. We use this new command: </br> `use github mcp to create a new issue in this repo, file the items we found in the last code review as bugs` </br> ![.](images/2026-06-30_173941.png "More context")
+
+
+
+
+
+
+7. Then executed this comand again: </br> `/review` </br> ![Review](images/2026-06-30_174315.png "Review")
+
+
+
+
+
+
+
+8. Then I selected the first option: `Yes`. Then I get this </br> ![Do you want to allow this?](images/2026-06-30_174541.png "Do you want to allow this?")
+
+
+
+
+
+
+
+9. I selected the second option. Then get this: </br> ![Test the path validation logic](images/2026-06-30_174808.png "Test the path validation logic")
+
+
+
+
+
+
+
+
+
+
+
+10. I left the first, and press `[Enter]`. </br> ![allow to read directory list](images/2026-06-30_175023.png "allow to read directory list")
+
+
+
+
+
+
+
+11. I press `[Enter]` in the second option. </br> ![Check the path.relative](images/2026-06-30_175255.png "Check the path.relative")
+
+
+
+
+
+12. Again `[Enter]` in the default option, the `1. Yes`. </br> ![cd /tmp &&](images/2026-06-30_180012.png "cd /tmp &&")
+
+
+
+
+
+
+13. The default and `[Enter]`. </br> ![XSS vulnerability](images/2026-06-30_180245.png "XSS vulnerability")
+
+
+
+
+
+
+
+
+14. Option `1. Yes`. </br> ![Test the date calculation logic](images/2026-06-30_180507.png "Test the date calculation logic")
+
+
+
+
+
+
+
+
+
+
+15. The `1. Yes` I selected.
+16. The final Option check and get a `XSS vulnerability in the index.html` </br> ![Allow directory access](images/2026-06-30_180741.png "Allow directory access")
+
+
+
+
+
+
+
+
+
+
+
+17. Press the second option.
+18. Get the Optin for `Create GitHub issue for XSS vulnerability`: </br>![Create GitHub issue for XSS vulnerability](images/2026-06-30_181154.png "Create GitHub issue for XSS vulnerability") </br> Let run this command with `[Enter]`.
+
+
+
+
+
+
+
+
+
+
+
+19. It failed, but the suggestion is this: </br> ![Stored XSS Vulnerability in public/index.html:135](images/2026-06-30_181522.png "Stored XSS Vulnerability in public/index.html:135")
+
+
+
+
+
+
+20. Ending with the `quit` command:
+
+        ```
+          ╭─╮╭─╮   Changes    +0 -0
+          ╰─╯╰─╯   AI Credits 31 (1h 10m 25s)
+          █ ▘▝ █   Tokens     ↑ 671.2k (505.8k cached, 159.1k written) • ↓ 10.9k (4.9k reasoning)
+          ▔▔▔▔    Resume     copilot --resume=6e08fd9b-0740-4d55-a29f-927ff29258ab
+        ```
