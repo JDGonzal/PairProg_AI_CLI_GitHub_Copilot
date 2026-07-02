@@ -562,3 +562,50 @@ Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learn
           █ ▘▝ █   Tokens     ↑ 671.2k (505.8k cached, 159.1k written) • ↓ 10.9k (4.9k reasoning)
           ▔▔▔▔    Resume     copilot --resume=6e08fd9b-0740-4d55-a29f-927ff29258ab
         ```
+
+
+### 3.2. Using skills: Reusable workflows in Copilot CLI
+
+1. After select the correct path and write in the `TERMINAL`, the `copilot` command.
+2. We start with the command: </br> `/skills add .github/skills/vanilla-localstorage-preferences/SKILL.md` </br> ![Added personal skill](images/2026-06-30_183040.png "Added personal skill")
+
+
+
+
+
+
+
+3. Another command: </br> `/skills list` </br> It shows 4: </br> ![Found 4 skills](images/2026-07-02_144223.png "Found 4 skills")
+
+
+
+
+
+
+
+
+4. In the `Copilot` `TERMINAL`, we write this command: </br> `use the vanilla-localstorage-preferences skill. fix the ux issue where refreshing the repo path add a "rememeber this repo path" checkbox. If enabled, save the repo path and restore on page load. Keep changes minimal and vanilla js only; don't change the backend.`
+5. I added this line </br> `If exist this checkbox and functionality, do nothing.`
+6. Finally, I get this: </br> ![No changes needed](images/2026-07-02_145412.png "No changes needed")
+
+
+
+
+
+
+
+
+
+
+
+7. Close the `Copilot` with `quit` command:
+
+        ````
+          ╭─╮╭─╮   Changes    +0 -0
+          ╰─╯╰─╯   AI Credits 4.66 (44h 27m 50s)
+          █ ▘▝ █   Tokens     ↑ 118.0k (91.3k cached, 26.7k written) • ↓ 825 (507 reasoning)
+          ▔▔▔▔    Resume     copilot --resume=1ee53f3d-0b25-419e-84dc-fe7ce7827ee3
+        ```
+
+
+
