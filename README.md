@@ -609,3 +609,84 @@ Check out my other courses on [LinkedIn Learning](https://www.linkedin.com/learn
 
 
 
+## 4. Commands and Modes of GitHub Copilot CLI
+
+### 4.1. Inline prompts and continuing work across sessions
+
+1. In the `TERMINAL`, write this command: </br> `copilot --resume` </br> ![Resume Session](images/2026-07-02_150433.png "Resume Session")
+
+
+
+
+
+
+
+
+
+
+
+
+2. If I press `[Enter]` when it is in the first task or number it will show all inside this: </br> ![Fix UX for Repo Path Checkbox](images/2026-07-02_150843.png "Fix UX for Repo Path Checkbox")
+
+
+
+
+
+
+
+
+
+
+
+3. Another command to use is `/resume` and the `sessionId`, is the values in the first column of the `"Resume Session"` picture.
+4. If we don't know the `sessionId`, it will show the list: </br> ![Resume Session](images/2026-07-02_151330.png "Resume Session")
+
+
+
+
+
+
+
+5. Press `[Esc]` key.
+6. Let's exit with the `quit` command.
+7. In the `TERMINAL`, another command is: </br> `copilot -p "give me a powershell command to find where /api/standup is defined in this repo"`
+8. But I get this error: </br> ![Request failed](images/2026-07-02_152808.png "Request failed") </br> I used the `[Ctrl]`+`[c]` keys.
+
+
+
+
+
+
+9. I'm going to opne another `TERMINAL`, that uses `Powershell`.
+10. On this new `TERMINAL`, change to the project directory.
+11. Write the command, and get this answer: </br> ![PowerShell command to search](images/2026-07-02_153416.png "PowerShell command to search")
+12. Another command in the `TERMINAL`: </br> `copilot -p "in one paragraph, summarize what the standup generator server does and what endpoint it exposes"` </br> Then it shows: ![What does it?](images/2026-07-02_153920.png "What does it?") </br> `The standup generator server is a simple Express.js application that automatically generates daily standup notes by parsing git commit history. It exposes a POST endpoint at '/api/standup' that accepts a repository path in its JSON body, retrieves all commits from yesterday and today using git commands, gathers detailed statistics for each commit (hash, message, author, files changed, lines added/deleted), and returns the commits organized by day so developers can quickly summarize their work during standups.`
+
+
+
+
+
+
+
+
+### 4.2. Give Copilot context: Referencing files and running shell commands and running shell commands
+
+1. We start in the `TERMIMAL` with the `copilot` command.
+2. Another command is: </br> `!dir` or `!ls` </br> ![dir or ls](images/2026-07-02_155422.png "dir or ls")
+
+
+
+
+
+
+
+
+3. If you write the `@` and name example `index` it willl showme the complet path: </br> ![index.html](images/2026-07-02_155657.png "index.html")
+
+
+
+
+4. After the path of this file add this text: </br> `Implement the Blockers feature: \n Replace the placeholder with a list of blockers. \n Add an input + Add button to add a blocker \n Each blocker can be removed \n Persist blockers in localStorage so they survive refresh. \n Keep it minimal, vanilla JS only, no backend changes.`
+5. It shows me this to add a question: </br> ![run this command](images/2026-07-02_163141.png "run this command")
+6. I press `[Enter]`, on the default `1. Yes`
+7. It completes with this last information: </br> ![.]( "")
